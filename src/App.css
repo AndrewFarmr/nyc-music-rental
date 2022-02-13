@@ -1,0 +1,24 @@
+.App {
+  text-align: center;
+}
+
+.Reservation {
+  padding-top: 100px;
+}
+
+.Instrument-logo {
+  height: 400px;
+  width: 400px;
+  pointer-events: none;
+}
+
+.App-header {
+  background-color: #1a6cab;
+  min-height: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
