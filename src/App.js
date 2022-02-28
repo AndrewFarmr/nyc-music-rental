@@ -19,6 +19,7 @@ class Reservation extends React.Component {
         <div className="Reservation-contact">
           {this.props.contact}
         </div>
+        <button onClick={() => this.props.onClick()}>Reserve</button>
       </div>
     );
   }
@@ -34,14 +35,35 @@ class SearchPage extends React.Component {
         {picture : instrument3, 'description' : 'item 3', 'contact' : 'item_owner3@gmail.com'}],
     };
   };
+
+  handleReservationClick(i) {
+    console.log("handleReservationClick")
+    var reservations_copy = this.state.reservations.slice();
+    reservations_copy[i].contact = "N/A. Reserved.";
+    this.setState({reservations: reservations_copy});
+  }
+
   render() {
-    const reservationItems = this.state.reservations.map((r) =>
-      <Reservation 
-        picture={r.picture} 
-        description={r.description}
-        contact={r.contact}
-      />
-    );
+    // handleReservationClick={() => this.handleReservationClick(i)}
+    var reservationItems = [];
+    for (let i = 0; i < this.state.reservations.length; i++) {
+      const reservationIth = this.state.reservations[i];
+      // Transform reservations from state to React UI.
+      const reservationUI = <Reservation 
+        picture = {reservationIth.picture}
+        description={reservationIth.description}
+        contact={reservationIth.contact}
+        onClick={() => this.handleReservationClick(i)}
+      />;
+      reservationItems.push(reservationUI);
+    }
+    // const reservationItems = this.state.reservations.map((r) =>
+    //   <Reservation 
+    //     picture={r.picture} 
+    //     description={r.description}
+    //     contact={r.contact}
+    //   />
+    // );
     return (
       reservationItems
     );
