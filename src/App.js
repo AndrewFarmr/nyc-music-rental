@@ -1,9 +1,16 @@
 import React from 'react';
-import { getReservations } from  './data'
+import { getReservations, updateReservation } from  './data';
 import './App.css';
 
 class Reservation extends React.Component {
+
   render() {
+    let action_button;
+    if (this.props.reserved) {
+      action_button = <button onClick={() => this.props.onClick()}>Release</button>
+    } else {
+      action_button = <button onClick={() => this.props.onClick()}>Reserve</button>
+    }
     return (
       <div className="Reservation">
         <div className="Reservation-picture">
@@ -15,7 +22,7 @@ class Reservation extends React.Component {
         <div className="Reservation-contact">
           {this.props.contact}
         </div>
-        <button onClick={() => this.props.onClick()}>Reserve</button>
+        {action_button}
       </div>
     );
   }
@@ -29,11 +36,17 @@ class SearchPage extends React.Component {
     };
   };
 
-  handleReservationClick(i) {
-    console.log("handleReservationClick")
-    var reservations_copy = this.state.reservations.slice();
-    reservations_copy[i].contact = "N/A. Reserved.";
-    this.setState({reservations: reservations_copy});
+  handleReservationClick(id, reserved_before) {
+    if (reserved_before) {
+      console.log("Releasing item: " + id);
+      updateReservation(id, false);
+    } else {
+      console.log("Reserving item: " + id);
+      updateReservation(id, true);
+    }
+    // var reservations_copy = this.state.reservations.slice();
+    // reservations_copy[i].contact = "N/A. Reserved.";
+    this.setState({reservations: getReservations()});
   }
 
   render() {
@@ -46,7 +59,9 @@ class SearchPage extends React.Component {
         picture = {reservationIth.picture}
         description={reservationIth.description}
         contact={reservationIth.contact}
-        onClick={() => this.handleReservationClick(i)}
+        reserved={reservationIth.reserved}
+        onClick={() => this.handleReservationClick(
+          reservationIth.id, reservationIth.reserved)}
       />;
       reservationItems.push(reservationUI);
     }
