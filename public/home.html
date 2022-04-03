@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Mock Music Website</title>
+    </head>
+    <style>
+        * {
+          box-sizing: border-box; 
+        }
+        body {
+          display: flex;
+          min-height: 100vh;
+          flex-direction: column;
+          margin: 0;
+        }
+        #main {
+          display: flex;
+          flex: 1;
+        }
+        #main > article {
+          flex: 1;
+        }
+        #main > nav, 
+        #main > aside {
+          flex: 0 0 20vw;
+          background: beige;
+        }
+        #main > nav {
+          order: -1;
+        }
+        header, footer {
+          background: rgb(205, 164, 50);
+          height: 20vh;
+        }
+        header, footer, article, nav, aside {
+          padding: 1em;
+        }
+        </style>
+    <body>
+        <header>NYC Music Instruments</header>
+        <div id="main">
+          <article>Available Instruments for Rent</article>
+          <nav>Instrument List </nav>
+          <img scr = "piano.png">
+          <aside>Sign Up</aside>
+        </div>
+        <footer>Made by Team 1 Students</footer>
+    </body>
+</html>
