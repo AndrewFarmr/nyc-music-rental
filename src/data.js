@@ -28,6 +28,21 @@ let reservations = [
     }
  ];
 
+export function addReservation(new_image, new_description, new_contact) {
+	let max_id = 0;
+	for (var reservation of reservations) {
+		max_id = Math.max(max_id, reservation.id)
+	}
+	reservation = {
+		id: max_id + 1,
+		picture: new_image,
+		description: new_description,
+		contact: new_contact,
+		reserved: false
+	}
+	reservations.unshift(reservation);
+};
+
 export function getReservations() {
 	return reservations;
 };

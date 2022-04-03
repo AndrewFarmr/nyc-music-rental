@@ -1,0 +1,33 @@
+.upload-instrument input, select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.upload-instrument button {
+  width: 100%;
+  background-color: #09A4D7;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.upload-instrument button:hover {
+  background-color: #45a049;
+}
+
+.upload-instrument form {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    width: 600px;
+    padding-top: 50px;
+}

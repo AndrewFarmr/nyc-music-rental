@@ -17,7 +17,7 @@ function App() {
           paddingBottom: "1rem",
         }}
       >
-        <Link to="/">Search</Link> |{" "}
+        <Link to="/search">Search</Link> |{" "}
         <Link to="/upload_instruments">Upload New Instrument</Link> 
       </nav>
       <Outlet />
