@@ -1,82 +1,7 @@
 import React from 'react';
-import { getReservations, updateReservation } from  './data';
 import './App.css';
+import { Outlet, Link } from "react-router-dom";
 
-class Reservation extends React.Component {
-
-  render() {
-    let action_button;
-    if (this.props.reserved) {
-      action_button = <button onClick={() => this.props.onClick()}>Release</button>
-    } else {
-      action_button = <button onClick={() => this.props.onClick()}>Reserve</button>
-    }
-    return (
-      <div className="Reservation">
-        <div className="Reservation-picture">
-          <img src={this.props.picture} className="Instrument-logo" />
-        </div>
-        <div className="Reservation-description">
-          {this.props.description}
-        </div>
-        <div className="Reservation-contact">
-          {this.props.contact}
-        </div>
-        {action_button}
-      </div>
-    );
-  }
-}
-
-class SearchPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      reservations: getReservations(),
-    };
-  };
-
-  handleReservationClick(id, reserved_before) {
-    if (reserved_before) {
-      console.log("Releasing item: " + id);
-      updateReservation(id, false);
-    } else {
-      console.log("Reserving item: " + id);
-      updateReservation(id, true);
-    }
-    // var reservations_copy = this.state.reservations.slice();
-    // reservations_copy[i].contact = "N/A. Reserved.";
-    this.setState({reservations: getReservations()});
-  }
-
-  render() {
-    // handleReservationClick={() => this.handleReservationClick(i)}
-    var reservationItems = [];
-    for (let i = 0; i < this.state.reservations.length; i++) {
-      const reservationIth = this.state.reservations[i];
-      // Transform reservations from state to React UI.
-      const reservationUI = <Reservation 
-        picture = {reservationIth.picture}
-        description={reservationIth.description}
-        contact={reservationIth.contact}
-        reserved={reservationIth.reserved}
-        onClick={() => this.handleReservationClick(
-          reservationIth.id, reservationIth.reserved)}
-      />;
-      reservationItems.push(reservationUI);
-    }
-    // const reservationItems = this.state.reservations.map((r) =>
-    //   <Reservation 
-    //     picture={r.picture} 
-    //     description={r.description}
-    //     contact={r.contact}
-    //   />
-    // );
-    return (
-      reservationItems
-    );
-  }
-}
 
 function App() {
   return (
@@ -86,7 +11,16 @@ function App() {
           <h1>NYC Instruments Rental </h1>
         </div>
       </header>
-      <SearchPage />
+      <nav
+        style={{
+          borderBottom: "solid 1px",
+          paddingBottom: "1rem",
+        }}
+      >
+        <Link to="/">Search</Link> |{" "}
+        <Link to="/upload_instruments">Upload New Instrument</Link> 
+      </nav>
+      <Outlet />
     </div>
   );
 }
